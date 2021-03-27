@@ -5,6 +5,7 @@ import url from 'url';
 import { Chain } from '../models/bitcoinUnits';
 import Lnurl from './lnurl';
 import Azteco from './azteco';
+import Aopp from './aopp';
 const bitcoin = require('bitcoinjs-lib');
 const bip21 = require('bip21');
 
@@ -17,7 +18,8 @@ class DeeplinkSchemaMatch {
       lowercaseString.startsWith('lightning:') ||
       lowercaseString.startsWith('blue:') ||
       lowercaseString.startsWith('bluewallet:') ||
-      lowercaseString.startsWith('lapp:')
+      lowercaseString.startsWith('lapp:') ||
+      lowercaseString.startsWith('aopp:')
     );
   }
 
@@ -176,6 +178,14 @@ class DeeplinkSchemaMatch {
         {
           screen: 'AztecoRedeem',
           params: Azteco.getParamsFromUrl(event.url),
+        },
+      ]);
+    } else if (Aopp.isCallbackUrl(event.url)) {
+      completionHandler([
+        'SignAoppRoot',
+        {
+          screen: 'SignAopp',
+          params: Aopp.getParamsFromUrl(event.url),
         },
       ]);
     } else if (new WatchOnlyWallet().setSecret(event.url).init().valid()) {

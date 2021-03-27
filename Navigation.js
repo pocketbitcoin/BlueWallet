@@ -35,6 +35,7 @@ import ExportMultisigCoordinationSetup from './screen/wallets/exportMultisigCoor
 import ViewEditMultisigCosigners from './screen/wallets/viewEditMultisigCosigners';
 import WalletXpub from './screen/wallets/xpub';
 import SignVerify from './screen/wallets/signVerify';
+import SignAopp from './screen/wallets/signAopp';
 import BuyBitcoin from './screen/wallets/buyBitcoin';
 import HodlHodl from './screen/wallets/hodlHodl';
 import HodlHodlViewOffer from './screen/wallets/hodlHodlViewOffer';
@@ -397,6 +398,17 @@ const SignVerifyStackRoot = () => {
   );
 };
 
+const SignAoppStack = createStackNavigator();
+const SignAoppStackRoot = () => {
+  const theme = useTheme();
+
+  return (
+    <SignAoppStack.Navigator name="SignAoppRoot" screenOptions={defaultStackScreenOptions} initialRouteName="SignAopp">
+      <SignAoppStack.Screen name="SignAopp" component={SignAopp} options={SignAopp.navigationOptions(theme)} />
+    </SignAoppStack.Navigator>
+  );
+};
+
 const WalletExportStack = createStackNavigator();
 const WalletExportStackRoot = () => {
   const theme = useTheme();
@@ -498,6 +510,7 @@ const Navigation = () => {
       <RootStack.Screen name="ViewEditMultisigCosignersRoot" component={ViewEditMultisigCosignersRoot} options={{ headerShown: false }} />
       <RootStack.Screen name="WalletXpubRoot" component={WalletXpubStackRoot} options={{ headerShown: false }} />
       <RootStack.Screen name="SignVerifyRoot" component={SignVerifyStackRoot} options={{ headerShown: false }} />
+      <RootStack.Screen name="SignAoppRoot" component={SignAoppStackRoot} options={{ headerShown: false }} />
       <RootStack.Screen name="BuyBitcoin" component={BuyBitcoin} options={BuyBitcoin.navigationOptions(theme)} />
       <RootStack.Screen name="Marketplace" component={Marketplace} options={Marketplace.navigationOptions(theme)} />
       <RootStack.Screen name="SelectWallet" component={SelectWallet} options={{ headerLeft: null }} />
